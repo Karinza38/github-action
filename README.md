@@ -1,4 +1,4 @@
-# GitHub Action Renovate
+GitHub Action Renovate
 
 GitHub Action to run Renovate self-hosted.
 
