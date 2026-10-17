@@ -18,7 +18,7 @@ runs:
         }}' >> "$GITHUB_ENV"
 
     - name: ♻️ Restore `node_modules`
-      uses: actions/cache/restore@1bd1e32a3bdc45362d1e726936510720a7c30a57 # v4.2.0
+      uses: actions/cache/restore@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
       id: node-modules-restore
       with:
         path: node_modules
@@ -33,12 +33,12 @@ runs:
         }}' >> "$GITHUB_ENV"
 
     - name: ⚙️ Setup pnpm
-      uses: pnpm/action-setup@fe02b34f77f8bc703788d5817da081398fad5dd2 # v4.0.0
+      uses: pnpm/action-setup@ea17c68df8912ef543352723c149a84f56e3d413 # v6.1.0
       with:
         standalone: true
 
     - name: ⚙️ Setup Node.js ${{ inputs.node-version }}
-      uses: actions/setup-node@39370e3970a6d050c480ffad4ff0ed4d3fdee5af # v4.1.0
+      uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
       with:
         node-version-file: .node-version
         cache: ${{ env.CACHE_HIT != 'true' && 'pnpm' || '' }}
@@ -53,7 +53,7 @@ runs:
 
     - name: ♻️ Write `node_modules` cache
       if: inputs.save-cache == 'true' && env.CACHE_HIT != 'true'
-      uses: actions/cache/save@1bd1e32a3bdc45362d1e726936510720a7c30a57 # v4.2.0
+      uses: actions/cache/save@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
       with:
         path: node_modules
         key: ${{ env.CACHE_KEY }}

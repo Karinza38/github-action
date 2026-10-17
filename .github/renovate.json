@@ -3,18 +3,6 @@
   "extends": ["github>renovatebot/.github", ":pinDependencies"],
   "packageRules": [
     {
-      "description": "Update references in Markdown files weekly",
-      "matchFileNames": ["**/*.md"],
-      "extends": ["schedule:weekly"],
-      "automerge": true,
-      "minimumReleaseAge": null,
-      "separateMajorMinor": false,
-      "commitMessageTopic": "references to {{{depName}}}",
-      "semanticCommitType": "docs",
-      "semanticCommitScope": null,
-      "additionalBranchPrefix": "docs-"
-    },
-    {
       "description": "Use build semantic type for some deps",
       "matchPackageNames": ["@vercel/ncc", "typescript"],
       "semanticCommitType": "build"
@@ -40,13 +28,11 @@
     {
       "description": "Don't pin renovate updates",
       "matchPackageNames": ["ghcr.io/renovatebot/renovate"],
-      "matchFileNames": ["action.yml", "src/docker.ts"],
       "pinDigests": false
     },
     {
       "description": "Use feat! semantic type for renovate major",
       "matchPackageNames": ["ghcr.io/renovatebot/renovate"],
-      "matchFileNames": ["action.yml", "src/docker.ts"],
       "matchUpdateTypes": ["major"],
       "commitMessagePrefix": "feat(deps)!:",
       "additionalBranchPrefix": "renovate-major"
@@ -55,7 +41,7 @@
   "customManagers": [
     {
       "customType": "regex",
-      "fileMatch": ["^README\\.md$"],
+      "managerFilePatterns": ["README.md"],
       "matchStrings": [
         "uses: renovatebot/github-action@(?<currentValue>[^\\s]+)"
       ],
@@ -64,7 +50,7 @@
     },
     {
       "customType": "regex",
-      "fileMatch": ["^README\\.md$"],
+      "managerFilePatterns": ["README.md"],
       "matchStrings": ["renovate-version: (?<currentValue>[^\\s]+)"],
       "depNameTemplate": "ghcr.io/renovatebot/renovate",
       "datasourceTemplate": "docker"
@@ -72,7 +58,7 @@
     {
       "description": "Update renovate version in action.yml",
       "customType": "regex",
-      "fileMatch": ["^action\\.yml$"],
+      "managerFilePatterns": ["action.yml"],
       "matchStrings": ["default: '(?<currentValue>[^\\s]+)' # renovate"],
       "depNameTemplate": "ghcr.io/renovatebot/renovate",
       "datasourceTemplate": "docker"
@@ -80,7 +66,7 @@
     {
       "description": "Update renovate version in src/docker.ts",
       "customType": "regex",
-      "fileMatch": ["^src/docker\\.ts$"],
+      "managerFilePatterns": ["src/docker.ts"],
       "matchStrings": ["version = '(?<currentValue>[^\\s]+)'; // renovate"],
       "depNameTemplate": "ghcr.io/renovatebot/renovate",
       "datasourceTemplate": "docker"

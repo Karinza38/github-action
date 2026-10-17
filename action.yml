@@ -18,14 +18,18 @@ inputs:
     required: false
   env-regex:
     description: |
-      Override the environment variables which will be passsed into the renovate container.
-      Defaults to `^(?:RENOVATE_\\w+|LOG_LEVEL|GITHUB_COM_TOKEN|NODE_OPTIONS|(?:HTTPS?|NO)_PROXY|(?:https?|no)_proxy)$`
+      Override the environment variables which will be passed into the renovate container.
+      Defaults to `^(?:RENOVATE_\\w+|LOG_LEVEL|GITHUB_COM_TOKEN|NODE_OPTIONS|NO_COLOR|(?:HTTPS?|NO)_PROXY|(?:https?|no)_proxy)$`
+    required: false
+  additional-env-list:
+    description: |
+      A newline-separated list of environment variable names to pass through to the Renovate container, in addition to those already matched by env-regex.
     required: false
   renovate-version:
     description: |
       Renovate version to use.
     required: false
-    default: '39' # renovate
+    default: '44' # renovate
   renovate-image:
     description: |
       Renovate docker image name.
@@ -63,5 +67,5 @@ inputs:
     required: false
 
 runs:
-  using: node20
+  using: node24
   main: dist/index.js
